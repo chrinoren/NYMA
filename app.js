@@ -16,7 +16,7 @@ const getWifiIP = () => {
   );
 };
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 // const url = "mongodb://localhost:27017/nymadb";
 const url =
   "mongodb+srv://sixteentech6:gQw8ZuVGY6Opr1Rk@cluster0.fgdzale.mongodb.net/nymadb";
