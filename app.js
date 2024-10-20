@@ -5,7 +5,7 @@ const app = express();
 const path = require("path");
 const os = require("os");
 const crypto = require("crypto");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs"); // Remplace bcrypt par bcryptjs
 
 const getWifiIP = () => {
   const interfaces = os.networkInterfaces();
@@ -17,7 +17,6 @@ const getWifiIP = () => {
 };
 
 const port = process.env.PORT || 3000;
-// const url = "mongodb://localhost:27017/nymadb";
 const url =
   "mongodb+srv://sixteentech6:gQw8ZuVGY6Opr1Rk@cluster0.fgdzale.mongodb.net/nymadb";
 
@@ -161,7 +160,7 @@ app.post("/signin", async (req, res) => {
     if (!isMatch) {
       return res
         .status(401)
-        .json({ message: "Login ou sMot de passe incorrect" });
+        .json({ message: "Login ou mot de passe incorrect" });
     }
 
     res.status(200).json({
@@ -186,7 +185,6 @@ const messageschema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // le destinateur
     recipient: {
       type: String,
       required: true,
@@ -198,9 +196,6 @@ const messageschema = new mongoose.Schema(
   },
   { collection: "messages" }
 );
-app.get("/usermessage", (req, res) => {
-  res.sendFile(path.join(__dirname, "usermessage", "message.html"));
-});
 
 const messagemodel = mongoose.model("messages", messageschema);
 
